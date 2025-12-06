@@ -1,5 +1,5 @@
 import type { MacOSApp } from "../types/macos-app-types";
-import { ExternalLink, Power } from "lucide-react";
+import { ExternalLink, Power, Download } from "lucide-react";
 import { Highlight } from "./highlight";
 
 const priceColors = {
@@ -24,6 +24,14 @@ export function MacOSAppCard({
   app: MacOSApp;
   searchQuery?: string;
 }) {
+  const handleConfigDownload = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (app.configUrl) {
+      window.open(app.configUrl, "_blank");
+    }
+  };
+
   return (
     <a
       href={app.url}
@@ -72,6 +80,16 @@ export function MacOSAppCard({
         >
           {app.price}
         </span>
+        {app.configUrl && (
+          <button
+            onClick={handleConfigDownload}
+            className="ml-auto flex items-center gap-1.5 px-2 py-1 rounded-md bg-foreground/10 hover:bg-foreground/20 text-xs font-medium transition-colors"
+            title="Download config"
+          >
+            <Download className="w-3 h-3" />
+            Config
+          </button>
+        )}
       </div>
     </a>
   );

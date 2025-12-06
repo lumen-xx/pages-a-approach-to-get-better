@@ -12,4 +12,5 @@ export type MacOSApp = {
     | "security";
   price: "free" | "paid" | "freemium";
   loginItem?: boolean;
+  configUrl?: string;
 };
