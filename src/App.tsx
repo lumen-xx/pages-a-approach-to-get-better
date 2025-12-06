@@ -4,6 +4,10 @@ import { Header } from "./components/header";
 import { useRouter } from "./hooks/use-router";
 import { HomePage } from "./pages/home";
 import { AboutPage } from "./pages/about";
+import { WebsitesPage } from "./pages/websites";
+import { MacOSAppsPage } from "./pages/macos-apps";
+import { MacOSPage } from "./pages/macos";
+import { AutomationsPage } from "./pages/automations";
 
 export function App() {
   const [dark, setDark] = useState(
@@ -27,6 +31,10 @@ export function App() {
       <Header dark={dark} setDark={setDark} />
       {path === "/" && <HomePage />}
       {path === "/about" && <AboutPage />}
+      {path === "/websites" && <WebsitesPage />}
+      {path === "/macos-apps" && <MacOSAppsPage />}
+      {path === "/macos" && <MacOSPage />}
+      {path === "/automations" && <AutomationsPage />}
     </div>
   );
 }
