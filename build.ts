@@ -168,4 +168,11 @@ if (existsSync(faviconPath)) {
   console.log("🎨 Copied favicon");
 }
 
+// Copy robots.txt for SEO
+const robotsPath = path.join("src", "robots.txt");
+if (existsSync(robotsPath)) {
+  await Bun.write(path.join(outdir, "robots.txt"), Bun.file(robotsPath));
+  console.log("🤖 Copied robots.txt");
+}
+
 console.log(`\n✅ Build completed in ${buildTime}ms\n`);

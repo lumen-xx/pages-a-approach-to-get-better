@@ -41,4 +41,13 @@ export const websites: Website[] = [
     tags: ["Simple", "Free", "File Sharing"],
     tagIcon: [<LucideIcons.FileText className="w-3 h-3" />],
   },
+  {
+    title: "Paint.js.org",
+    type: "website",
+    description:
+      "Paint.js.org is a simple and free online paint tool. Ngl makes me nostalgic.",
+    url: "https://paint.js.org",
+    tags: ["Simple", "Free", "Paint"],
+    tagIcon: [<LucideIcons.Palette className="w-3 h-3" />],
+  },
 ];

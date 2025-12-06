@@ -6,6 +6,7 @@ import ghostyImg from "../images/ghosty.svg";
 import shottrImg from "../images/shottr.svg";
 import mullvadImg from "../images/ mullvade_vpn.svg";
 import purepasteImg from "../images/purepaste.webp";
+import noTunesImg from "../images/notunes.webp";
 
 export const macosApps: MacOSApp[] = [
   {
@@ -52,6 +53,16 @@ export const macosApps: MacOSApp[] = [
     url: "https://sindresorhus.com/pure-paste",
     category: "utility",
     price: "freemium",
+    loginItem: true,
+  },
+  {
+    name: "noTunes",
+    description:
+      "noTunes is a macOS application that will prevent iTunes or Apple Music from launching.",
+    image: noTunesImg,
+    url: "https://no-tunes.com",
+    category: "utility",
+    price: "free",
     loginItem: true,
   },
 ];

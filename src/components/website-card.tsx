@@ -56,7 +56,7 @@ export function WebsiteCard({
       </div>
       <Separator />
       <CardContent>
-        <a className="flex items-center gap-2">
+        <div className="flex items-center gap-2">
           <p className="flex w-full items-center gap-2 bg-muted p-2 rounded-md hover:bg-muted/70 transition-all duration-150">
             {url}
           </p>
@@ -77,7 +77,7 @@ export function WebsiteCard({
               <ExternalLinkIcon className="w-4 h-4" />
             </a>
           </Button>
-        </a>
+        </div>
       </CardContent>
     </Card>
   );

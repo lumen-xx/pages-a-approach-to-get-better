@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pagesanapproachtogetbeter.com/sitemap.xml
+
