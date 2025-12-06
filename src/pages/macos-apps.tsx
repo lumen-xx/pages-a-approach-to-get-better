@@ -21,7 +21,7 @@ export function MacOSAppsPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="w-full max-w-5xl mx-auto px-4 pt-24 pb-8 flex-1">
+      <div className="w-full max-w-5xl mx-auto px-4 pt-24 pb-20 flex-1">
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">macOS Apps</h1>
           <p className="text-muted-foreground">The macOS apps I use daily.</p>

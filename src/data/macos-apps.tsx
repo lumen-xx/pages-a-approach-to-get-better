@@ -18,7 +18,7 @@ export const macosApps: MacOSApp[] = [
     loginItem: true,
   },
   {
-    name: "Ghostyy",
+    name: "Ghostty",
     description: "A minimal, fast, and secure browser",
     image: ghostyImg,
     url: "https://ghostty.org",
@@ -49,8 +49,8 @@ export const macosApps: MacOSApp[] = [
     description:
       "Pure Paste lets you paste as plain text by default. It sits in the menu bar and clears formatting (fonts, colors, bold, links, tables, etc.) from the text you copy.",
     image: purepasteImg,
-    url: "https://prepost.app",
-    category: "productivity",
+    url: "https://sindresorhus.com/pure-paste",
+    category: "utility",
     price: "freemium",
     loginItem: true,
   },

@@ -20,7 +20,7 @@ export function WebsitesPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="flex flex-col gap-4 w-full max-w-2xl mx-auto px-4 pt-24 pb-8 flex-1">
+      <div className="flex flex-col gap-4 w-full max-w-2xl mx-auto px-4 pt-24 pb-20 flex-1">
         <div className="mb-4">
           <h1 className="text-3xl font-bold mb-2">Websites</h1>
           <p className="text-muted-foreground">
