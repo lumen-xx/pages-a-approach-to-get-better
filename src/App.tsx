@@ -1,9 +1,14 @@
 import "./index.css";
+import { WebsiteCard } from "./components/website-card";
 
 export function App() {
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <h1 className="text-4xl font-bold">Hello, World</h1>
+      <WebsiteCard
+        title="Diagrams.net"
+        description="Diagrams.net is a free online diagramming tool that allows you to create diagrams, flowcharts, UML diagrams, and more."
+        url="https://app.diagrams.net/"
+      />
     </div>
   );
 }

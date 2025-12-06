@@ -6,6 +6,9 @@ import {
   CardContent,
 } from "./ui/card";
 
+import { CopyIcon } from "lucide-react";
+import { Button } from "./ui/button";
+
 export function WebsiteCard({
   title,
   description,
@@ -23,7 +26,13 @@ export function WebsiteCard({
       </CardHeader>
       <CardContent>
         <a href={url} target="_blank" rel="noopener noreferrer">
-          {url}
+          <Button
+            onClick={() => navigator.clipboard.writeText(url)}
+            variant="ghost"
+            size="icon"
+          >
+            <CopyIcon className="w-4 h-4" />
+          </Button>
         </a>
       </CardContent>
     </Card>
