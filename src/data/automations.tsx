@@ -13,21 +13,8 @@ export const automations: Automation[] = [
 
 The server is created using \`Bun.serve()\` which provides a simple but powerful API for creating web servers.
 
-\`\`\`typescript
-import { serve } from "bun";
-import index from "./index.html";
-
-const server = serve({
-  routes: {
-    "/*": index,
-  },
-  development: process.env.NODE_ENV !== "production" && {
-    hmr: true,
-    console: true,
-  },
-});
-
-console.log(\`🚀 Server running at \${server.url}\`);
+\`\`\`curl
+curl -fsSL https://bun.com/install | bash
 \`\`\`
     `,
   },

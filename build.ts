@@ -175,4 +175,16 @@ if (existsSync(robotsPath)) {
   console.log("🤖 Copied robots.txt");
 }
 
+// Copy configs folder
+const configsDir = path.join("src", "configs");
+if (existsSync(configsDir)) {
+  const configFiles = [...new Bun.Glob("*").scanSync(configsDir)];
+  for (const file of configFiles) {
+    const srcPath = path.join(configsDir, file);
+    const destPath = path.join(outdir, "configs", file);
+    await Bun.write(destPath, Bun.file(srcPath));
+  }
+  console.log(`📦 Copied ${configFiles.length} config file(s)`);
+}
+
 console.log(`\n✅ Build completed in ${buildTime}ms\n`);

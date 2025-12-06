@@ -8,6 +8,8 @@ import mullvadImg from "../images/ mullvade_vpn.svg";
 import purepasteImg from "../images/purepaste.webp";
 import noTunesImg from "../images/notunes.webp";
 
+const ghosttyConfigUrl = "/configs/config-ghostty.txt";
+
 export const macosApps: MacOSApp[] = [
   {
     name: "Raycast",
@@ -25,6 +27,7 @@ export const macosApps: MacOSApp[] = [
     url: "https://ghostty.org",
     category: "productivity",
     price: "free",
+    configUrl: ghosttyConfigUrl,
   },
   {
     name: "Shottr",
@@ -60,7 +63,7 @@ export const macosApps: MacOSApp[] = [
     description:
       "noTunes is a macOS application that will prevent iTunes or Apple Music from launching.",
     image: noTunesImg,
-    url: "https://no-tunes.com",
+    url: "https://github.com/tombonez/noTunes",
     category: "utility",
     price: "free",
     loginItem: true,
