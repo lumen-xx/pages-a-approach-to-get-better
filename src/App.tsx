@@ -6,9 +6,10 @@ import { HomePage } from "./pages/home";
 import { AboutPage } from "./pages/about";
 import { WebsitesPage } from "./pages/websites";
 import { MacOSAppsPage } from "./pages/macos-apps";
-import { MacOSPage } from "./pages/macos";
 import { AutomationsPage } from "./pages/automations";
 import { AutomationDetailPage } from "./pages/automation-detail";
+import { InstructionsPage } from "./pages/instructions";
+import { InstructionDetailPage } from "./pages/instruction-detail";
 
 export function App() {
   const [dark, setDark] = useState(
@@ -27,9 +28,11 @@ export function App() {
     return () => media.removeEventListener("change", handler);
   }, []);
 
-  // Check for automation detail route
+  // Check for detail routes
   const automationMatch = path.match(/^\/automations\/(.+)$/);
   const automationSlug = automationMatch?.[1];
+  const instructionMatch = path.match(/^\/instructions\/(.+)$/);
+  const instructionSlug = instructionMatch?.[1];
 
   return (
     <div className="min-h-screen">
@@ -38,9 +41,10 @@ export function App() {
       {path === "/about" && <AboutPage />}
       {path === "/websites" && <WebsitesPage />}
       {path === "/macos-apps" && <MacOSAppsPage />}
-      {path === "/macos" && <MacOSPage />}
       {path === "/automations" && <AutomationsPage />}
       {automationSlug && <AutomationDetailPage slug={automationSlug} />}
+      {path === "/instructions" && <InstructionsPage />}
+      {instructionSlug && <InstructionDetailPage slug={instructionSlug} />}
     </div>
   );
 }

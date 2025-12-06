@@ -1,0 +1,79 @@
+# Ask user for scale factor (e.g. 0.5 = half, 2 = double)
+scale=$(osascript <<EOF
+set dialogText to "Enter scale factor (e.g. 0.5 to halve, 2 to double):"
+set userInput to text returned of (display dialog dialogText default answer "0.5")
+return userInput
+EOF
+)
+
+# Allow German-style comma input: 0,5 -> 0.5
+scale="${scale//,/.}"
+
+# If empty (cancel or nothing), exit
+if [[ -z "$scale" ]]; then
+  exit 0
+fi
+
+# Path to cwebp (Homebrew – ARM + Intel)
+CWEBP_BIN="/opt/homebrew/bin/cwebp"
+if [ ! -x "$CWEBP_BIN" ]; then
+  CWEBP_BIN="/usr/local/bin/cwebp"
+fi
+
+for f in "$@"; do
+  # Safety: skip non-files
+  if [ ! -f "$f" ]; then
+    continue
+  fi
+
+  ext="${f##*.}"
+  ext_lc=$(echo "$ext" | tr '[:upper:]' '[:lower:]')
+
+  # Get current width/height with sips (works for most formats, incl. webp for reading)
+  width=$(sips -g pixelWidth "$f" 2>/dev/null | awk '/pixelWidth/ {print $2}')
+  height=$(sips -g pixelHeight "$f" 2>/dev/null | awk '/pixelHeight/ {print $2}')
+
+  if [[ -z "$width" || -z "$height" ]]; then
+    echo "Skipping $f (could not read size)"
+    continue
+  fi
+
+  # Calculate new width/height (integer)
+  new_width=$(python3 - <<EOF
+scale = float("$scale")
+width = float("$width")
+print(int(width * scale))
+EOF
+)
+
+  new_height=$(python3 - <<EOF
+scale = float("$scale")
+height = float("$height")
+print(int(height * scale))
+EOF
+)
+
+  echo "Resizing $f from ${width}x${height}px to ${new_width}x${new_height}px"
+
+  dir=$(dirname "$f")
+  base=$(basename "$f")
+  name="${base%.*}"
+
+  if [[ "$ext_lc" == "webp" ]]; then
+    # For WEBP: create a new scaled file, avoid overwrite/rename issues
+    clean_scale=$(echo "$scale" | tr '.' '_')
+    out="$dir/${name}@${clean_scale}x.webp"
+
+    if [ ! -x "$CWEBP_BIN" ]; then
+      echo "cwebp not found, cannot process webp: $f"
+      continue
+    fi
+
+    "$CWEBP_BIN" -q 80 -resize "$new_width" "$new_height" "$f" -o "$out"
+    echo "Created WEBP: $out"
+  else
+    # Non-webp: sips can overwrite in place
+    sips --resampleWidth "$new_width" "$f" >/dev/null
+    echo "Overwrote: $f"
+  fi
+done

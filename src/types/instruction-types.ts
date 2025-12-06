@@ -4,14 +4,15 @@ export type Dependency = {
   install?: string;
 };
 
-export type Automation = {
+export type Instruction = {
   slug: string;
   title: string;
   description: string;
   icon?: string | React.ReactNode;
   image?: string;
-  category: "shortcuts" | "applescript" | "raycast" | "terminal" | "other";
+  category: "setup" | "config" | "tips" | "troubleshooting" | "other";
   difficulty: "beginner" | "intermediate" | "advanced";
   content: string;
   dependencies?: Dependency[];
 };
+

@@ -6,7 +6,7 @@ import {
   ChevronDown,
   Globe,
   Monitor,
-  Apple,
+  BookOpen,
   Zap,
 } from "lucide-react";
 import logo from "../logo.svg";
@@ -136,10 +136,10 @@ export function Header({
             onClose={() => setDropdownOpen(false)}
           />
           <DropdownItem
-            href="/macos"
-            icon={Apple}
-            title="macOS"
-            description="Tips and configurations"
+            href="/instructions"
+            icon={BookOpen}
+            title="Instructions"
+            description="Guides and tutorials"
             onClose={() => setDropdownOpen(false)}
           />
           <DropdownItem
