@@ -28,26 +28,45 @@ function CodeBlock({ code, language }: { code: string; language?: string }) {
   };
 
   return (
-    <div className="relative group my-4">
-      {language && (
-        <div className="absolute top-0 left-0 px-3 py-1 text-xs text-muted-foreground bg-muted/50 rounded-tl-lg rounded-br-lg font-mono">
-          {language}
+    <div className="my-5 group">
+      <div className="rounded-lg overflow-hidden bg-zinc-900 ring-1 ring-white/10">
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-2 bg-white/5">
+          {language ? (
+            <span className="text-[11px] font-medium text-zinc-400 uppercase tracking-wider">
+              {language}
+            </span>
+          ) : (
+            <span />
+          )}
+          <button
+            onClick={handleCopy}
+            className={`flex items-center gap-1.5 px-2 py-1 rounded text-[11px] font-medium transition-all ${
+              copied
+                ? "text-emerald-400 bg-emerald-400/10"
+                : "text-zinc-500 hover:text-zinc-300 hover:bg-white/5"
+            }`}
+          >
+            {copied ? (
+              <>
+                <Check className="w-3 h-3" />
+                Copied
+              </>
+            ) : (
+              <>
+                <Copy className="w-3 h-3" />
+                Copy
+              </>
+            )}
+          </button>
         </div>
-      )}
-      <button
-        onClick={handleCopy}
-        className="absolute top-2 right-2 p-2 rounded-md bg-muted/50 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-muted"
-        title="Copy code"
-      >
-        {copied ? (
-          <Check className="w-4 h-4 text-green-500" />
-        ) : (
-          <Copy className="w-4 h-4 text-muted-foreground" />
-        )}
-      </button>
-      <pre className="bg-zinc-900 dark:bg-zinc-950 text-zinc-100 p-4 pt-8 rounded-lg overflow-x-auto">
-        <code className="text-sm font-mono">{code}</code>
-      </pre>
+        {/* Code */}
+        <div className="px-4 py-4 overflow-x-auto">
+          <pre className="text-[13px] leading-6">
+            <code className="font-mono text-zinc-300">{code}</code>
+          </pre>
+        </div>
+      </div>
     </div>
   );
 }
@@ -96,18 +115,32 @@ export function AutomationDetailPage({ slug }: { slug: string }) {
 
         {/* Header */}
         <div className="flex items-start gap-4 mb-8">
-          <span className="text-5xl">{automation.icon}</span>
+          {automation.image ? (
+            <img
+              src={automation.image}
+              alt={automation.title}
+              className="w-14 h-14 rounded-xl object-contain"
+            />
+          ) : (
+            <span className="text-5xl">{automation.icon}</span>
+          )}
           <div>
             <h1 className="text-3xl font-bold mb-2">{automation.title}</h1>
-            <p className="text-muted-foreground mb-3">{automation.description}</p>
+            <p className="text-muted-foreground mb-3">
+              {automation.description}
+            </p>
             <div className="flex items-center gap-2">
               <span
-                className={`text-xs px-2 py-1 rounded-md font-medium ${categoryColors[automation.category]}`}
+                className={`text-xs px-2 py-1 rounded-md font-medium ${
+                  categoryColors[automation.category]
+                }`}
               >
                 {automation.category}
               </span>
               <span
-                className={`text-xs px-2 py-1 rounded-md font-medium ${difficultyColors[automation.difficulty]}`}
+                className={`text-xs px-2 py-1 rounded-md font-medium ${
+                  difficultyColors[automation.difficulty]
+                }`}
               >
                 {automation.difficulty}
               </span>
@@ -148,7 +181,7 @@ type ContentBlock =
 function parseContent(content: string): ContentBlock[] {
   const blocks: ContentBlock[] = [];
   const codeBlockRegex = /```(\w+)?\n([\s\S]*?)```/g;
-  
+
   let lastIndex = 0;
   let match;
 
@@ -168,7 +201,7 @@ function parseContent(content: string): ContentBlock[] {
     blocks.push({
       type: "code",
       language: match[1] || undefined,
-      content: match[2].trim(),
+      content: (match[2] || "").trim(),
     });
 
     lastIndex = match.index + match[0].length;
@@ -207,16 +240,17 @@ function parseMarkdown(content: string): string {
         /`([^`]+)`/g,
         '<code class="bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-pink-500">$1</code>'
       )
-      // Links
-      .replace(
-        /\[([^\]]+)\]\(([^)]+)\)/g,
-        '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">$1</a>'
-      )
+      // Links - internal links get tag style, external links get regular style
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, text, url) => {
+        if (url.startsWith("/")) {
+          // Internal deeplink - tag style
+          return `<a href="${url}" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-sm font-medium bg-blue-500/10 text-blue-500 hover:bg-blue-500/20 transition-colors">${text}<svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg></a>`;
+        }
+        // External link
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">${text}</a>`;
+      })
       // Ordered lists
-      .replace(
-        /^\d+\. (.*$)/gim,
-        '<li class="ml-6 mb-2 list-decimal">$1</li>'
-      )
+      .replace(/^\d+\. (.*$)/gim, '<li class="ml-6 mb-2 list-decimal">$1</li>')
       // Unordered lists
       .replace(/^- (.*$)/gim, '<li class="ml-6 mb-2 list-disc">$1</li>')
       // Wrap consecutive list items

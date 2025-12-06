@@ -36,7 +36,15 @@ export function AutomationCard({
       className="group relative flex flex-col p-5 rounded-2xl border border-border bg-card hover:bg-muted/50 hover:border-foreground/20 transition-all duration-200 hover:-translate-y-1"
     >
       <div className="flex items-start justify-between mb-3">
-        <span className="text-4xl">{automation.icon}</span>
+        {automation.image ? (
+          <img
+            src={automation.image}
+            alt={automation.title}
+            className="w-12 h-12 rounded-xl object-contain"
+          />
+        ) : (
+          <span className="text-4xl">{automation.icon}</span>
+        )}
         <ChevronRight className="w-5 h-5 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
       </div>
 
@@ -63,4 +71,3 @@ export function AutomationCard({
     </a>
   );
 }
-
