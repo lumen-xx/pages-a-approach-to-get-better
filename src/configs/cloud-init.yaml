@@ -1,0 +1,110 @@
+#cloud-config
+
+# User setup
+users:
+  - name: deploy
+    groups: users, admin, sudo
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-ed25519 YOUR_PUBLIC_KEY_HERE
+
+# Packages to install
+packages:
+  - nginx
+  - certbot
+  - python3-certbot-nginx
+  - fail2ban
+  - ufw
+  - micro
+  - htop
+  - curl
+  - git
+  - unzip
+  - unattended-upgrades
+
+package_update: true
+package_upgrade: true
+
+# Timezone
+timezone: Europe/Berlin
+
+# Config files
+write_files:
+  # SSH hardening
+  - path: /etc/ssh/sshd_config.d/hardening.conf
+    content: |
+      PermitRootLogin no
+      PasswordAuthentication no
+      KbdInteractiveAuthentication no
+      MaxAuthTries 3
+      AllowUsers deploy
+
+  # Nginx config
+  - path: /etc/nginx/nginx.conf
+    content: |
+      user www-data;
+      worker_processes auto;
+      pid /run/nginx.pid;
+
+      events {
+          worker_connections 2048;
+          multi_accept on;
+      }
+
+      http {
+          sendfile on;
+          tcp_nopush on;
+          tcp_nodelay on;
+          keepalive_timeout 65;
+          types_hash_max_size 2048;
+          server_tokens off;
+
+          client_max_body_size 50M;
+
+          gzip on;
+          gzip_vary on;
+          gzip_proxied any;
+          gzip_comp_level 6;
+          gzip_types text/plain text/css application/json application/javascript text/xml;
+
+          limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;
+
+          access_log /var/log/nginx/access.log;
+          error_log /var/log/nginx/error.log;
+
+          include /etc/nginx/mime.types;
+          default_type application/octet-stream;
+          include /etc/nginx/sites-enabled/*;
+      }
+
+  # Auto security updates
+  - path: /etc/apt/apt.conf.d/20auto-upgrades
+    content: |
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Unattended-Upgrade "1";
+      APT::Periodic::AutocleanInterval "7";
+
+# Commands to run
+runcmd:
+  # Remove default nginx site
+  - rm -f /etc/nginx/sites-enabled/default
+  # Setup fail2ban
+  - printf "[sshd]\nenabled = true\nbanaction = iptables-multiport" > /etc/fail2ban/jail.local
+  - systemctl enable fail2ban
+  # Enable nginx
+  - systemctl enable nginx
+  # Setup firewall
+  - ufw default deny incoming
+  - ufw default allow outgoing
+  - ufw allow ssh
+  - ufw allow 'Nginx Full'
+  - ufw --force enable
+  # Create swap (2GB)
+  - fallocate -l 2G /swapfile
+  - chmod 600 /swapfile
+  - mkswap /swapfile
+  - swapon /swapfile
+  - echo '/swapfile none swap sw 0 0' >> /etc/fstab
+  # Reboot to apply all changes
+  - reboot
