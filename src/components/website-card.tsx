@@ -6,24 +6,21 @@ import {
   CardContent,
 } from "./ui/card";
 
-import { Badge, CheckIcon, CopyIcon, ExternalLinkIcon } from "lucide-react";
+import { CheckIcon, CopyIcon, ExternalLinkIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
 import { useState } from "react";
+import type { Website } from "@/types/website-types";
+import { Highlight } from "./highlight";
 
 export function WebsiteCard({
-  title,
-  description,
-  url,
-  tags,
-  tagIcon,
+  website,
+  searchQuery = "",
 }: {
-  title: string;
-  description: string;
-  url: string;
-  tags: string[];
-  tagIcon: React.ReactNode[];
+  website: Website;
+  searchQuery?: string;
 }) {
+  const { type, title, description, url, tags, tagIcon } = website;
   const [showCheck, setShowCheck] = useState(false);
 
   const handleCopy = () => {
@@ -35,8 +32,16 @@ export function WebsiteCard({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
+        <CardTitle className="flex items-center">
+          <Highlight text={title} query={searchQuery} />
+          <span className="mr-3" />
+          <p className="text-xs rounded-xl px-2 py-1 bg-muted text-muted-foreground">
+            {type}
+          </p>
+        </CardTitle>
+        <CardDescription>
+          <Highlight text={description} query={searchQuery} />
+        </CardDescription>
       </CardHeader>
       <div className="flex flex-wrap gap-2 text-xs px-6">
         {tags.map((tag, index) => (
@@ -45,7 +50,7 @@ export function WebsiteCard({
             className="flex w-fit p-2 items-center justify-center rounded-md gap-2 bg-muted text-muted-foreground mb-1"
           >
             {tagIcon[index]}
-            {tag}
+            <Highlight text={tag} query={searchQuery} />
           </div>
         ))}
       </div>
