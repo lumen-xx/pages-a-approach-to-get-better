@@ -24,4 +24,30 @@ export const websites: Website[] = [
       <LucideIcons.BarChartBig className="w-3 h-3" />,
     ],
   },
+  {
+    title: "Excalidraw",
+    type: "app",
+    description:
+      "Excalidraw is a simple whiteboard tool that allows you to create diagrams, flowcharts, and more. It's a great tool for quick and easy drawing.",
+    url: "https://excalidraw.com/",
+    tags: ["Simple", "Free", "Drawing", "Collaboration"],
+    tagIcon: [<LucideIcons.PencilRuler className="w-3 h-3" />],
+  },
+  {
+    title: "Pairdrop",
+    type: "tool",
+    description:
+      "Pairdrop is a tool that allows you to share files with your friends. It's a great tool for quick and easy file sharing.",
+    url: "https://pairdrop.net/",
+    tags: ["Simple", "Free", "File Sharing", "Collaboration"],
+    tagIcon: [<LucideIcons.Share2 className="w-3 h-3" />],
+  },
+  {
+    title: "Filebin",
+    type: "website",
+    description: "Filebin is a simple and free file sharing tool.",
+    url: "https://filebin.net",
+    tags: ["Simple", "Free", "File Sharing"],
+    tagIcon: [<LucideIcons.FileText className="w-3 h-3" />],
+  },
 ];

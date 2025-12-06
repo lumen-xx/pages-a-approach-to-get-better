@@ -35,15 +35,17 @@ export function App() {
   }, [search]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={() => setDark(!dark)}
-        className="absolute top-4 right-4"
-      >
-        {dark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-      </Button>
+    <div className="min-h-screen flex items-center justify-center flex-col">
+      <div className="flex items-center w-full justify-center">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setDark(!dark)}
+          className="absolute top-4 right-4"
+        >
+          {dark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+        </Button>
+      </div>
       <div className="flex flex-col gap-4 w-xl max-w-2xl px-4">
         <Input
           placeholder="Search tags, descriptions..."
