@@ -25,12 +25,7 @@ export function WebsiteCard({
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <a
-          className="flex items-center gap-2"
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a className="flex items-center gap-2">
           {url}
           <Button variant="ghost" size="icon">
             <CopyIcon className="w-4 h-4" />
