@@ -33,7 +33,11 @@ export function WebsitesPage() {
           onChange={(e) => setSearch(e.target.value)}
         />
         {filteredWebsites.map((website) => (
-          <WebsiteCard key={website.url} website={website} searchQuery={search} />
+          <WebsiteCard
+            key={website.url}
+            website={website}
+            searchQuery={search}
+          />
         ))}
       </div>
       <Footer />

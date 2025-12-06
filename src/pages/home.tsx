@@ -8,8 +8,8 @@ import {
   Sparkles,
   Search,
   Bookmark,
-  Coffee,
 } from "lucide-react";
+import { Footer } from "../components/footer";
 
 function NavLink({
   href,
@@ -247,28 +247,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-8 px-6 border-t border-border">
-        <div className="max-w-5xl mx-auto flex items-center justify-between text-sm text-muted-foreground">
-          <span>© 2024 Pages. An approach to get better.</span>
-          <div className="flex items-center gap-6">
-            <NavLink href="/about">
-              <span className="hover:text-foreground transition-colors">
-                About
-              </span>
-            </NavLink>
-            <a
-              href="https://buymeacoffee.com/luuuuumen"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#FFDD00] text-black font-medium text-sm hover:bg-[#FFDD00]/90 transition-colors"
-            >
-              <Coffee className="w-4 h-4" />
-              Buy me a coffee
-            </a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
