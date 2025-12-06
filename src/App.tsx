@@ -6,11 +6,20 @@ import * as LucideIcons from "lucide-react";
 import * as PhosphorIcons from "@phosphor-icons/react";
 
 export function App() {
-  const [dark, setDark] = useState(false);
+  const [dark, setDark] = useState(
+    () => window.matchMedia("(prefers-color-scheme: dark)").matches
+  );
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
   }, [dark]);
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const handler = (e: MediaQueryListEvent) => setDark(e.matches);
+    media.addEventListener("change", handler);
+    return () => media.removeEventListener("change", handler);
+  }, []);
 
   return (
     <div className="min-h-screen flex items-center justify-center">
