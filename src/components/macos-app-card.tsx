@@ -1,0 +1,61 @@
+import type { MacOSApp } from "../types/macos-app-types";
+import { ExternalLink } from "lucide-react";
+import { Highlight } from "./highlight";
+
+const priceColors = {
+  free: "bg-emerald-500/10 text-emerald-500",
+  paid: "bg-amber-500/10 text-amber-500",
+  freemium: "bg-blue-500/10 text-blue-500",
+};
+
+const categoryColors = {
+  productivity: "bg-purple-500/10 text-purple-500",
+  developer: "bg-orange-500/10 text-orange-500",
+  utility: "bg-cyan-500/10 text-cyan-500",
+  media: "bg-pink-500/10 text-pink-500",
+  other: "bg-zinc-500/10 text-zinc-500",
+};
+
+export function MacOSAppCard({
+  app,
+  searchQuery = "",
+}: {
+  app: MacOSApp;
+  searchQuery?: string;
+}) {
+  return (
+    <a
+      href={app.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative flex flex-col p-5 rounded-2xl border border-border bg-card hover:bg-muted/50 hover:border-foreground/20 transition-all duration-200 hover:-translate-y-1"
+    >
+      <div className="flex items-start justify-between mb-3">
+        <span className="text-4xl">{app.icon}</span>
+        <ExternalLink className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+      </div>
+
+      <h3 className="font-semibold text-lg mb-1">
+        <Highlight text={app.name} query={searchQuery} />
+      </h3>
+
+      <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+        <Highlight text={app.description} query={searchQuery} />
+      </p>
+
+      <div className="mt-auto flex items-center gap-2">
+        <span
+          className={`text-xs px-2 py-1 rounded-md font-medium ${categoryColors[app.category]}`}
+        >
+          {app.category}
+        </span>
+        <span
+          className={`text-xs px-2 py-1 rounded-md font-medium ${priceColors[app.price]}`}
+        >
+          {app.price}
+        </span>
+      </div>
+    </a>
+  );
+}
+
