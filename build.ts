@@ -146,4 +146,11 @@ const outputTable = result.outputs.map(output => ({
 console.table(outputTable);
 const buildTime = (end - start).toFixed(2);
 
+// Copy _redirects for Cloudflare Pages SPA routing
+const redirectsPath = path.join("src", "_redirects");
+if (existsSync(redirectsPath)) {
+  await Bun.write(path.join(outdir, "_redirects"), Bun.file(redirectsPath));
+  console.log("📋 Copied _redirects for SPA routing");
+}
+
 console.log(`\n✅ Build completed in ${buildTime}ms\n`);
