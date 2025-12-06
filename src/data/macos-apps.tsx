@@ -1,53 +1,57 @@
 import type { MacOSApp } from "../types/macos-app-types";
 
+// Import images
+import raycastImg from "../images/raycast.svg";
+import ghostyImg from "../images/ghosty.svg";
+import shottrImg from "../images/shottr.svg";
+import mullvadImg from "../images/ mullvade_vpn.svg";
+import purepasteImg from "../images/purepaste.webp";
+
 export const macosApps: MacOSApp[] = [
   {
     name: "Raycast",
     description: "Blazingly fast, totally extendable launcher",
-    icon: "🚀",
+    image: raycastImg,
     url: "https://raycast.com",
     category: "productivity",
     price: "freemium",
+    loginItem: true,
   },
   {
-    name: "Arc",
-    description: "The browser for a better internet",
-    icon: "🌐",
-    url: "https://arc.net",
+    name: "Ghostyy",
+    description: "A minimal, fast, and secure browser",
+    image: ghostyImg,
+    url: "https://ghostty.org",
     category: "productivity",
     price: "free",
   },
   {
-    name: "Warp",
-    description: "The terminal reimagined with AI",
-    icon: "⚡",
-    url: "https://warp.dev",
-    category: "developer",
-    price: "freemium",
-  },
-  {
-    name: "CleanShot X",
-    description: "Capture your Mac's screen like a pro",
-    icon: "📸",
-    url: "https://cleanshot.com",
+    name: "Shottr",
+    description: "A minimal, fast, and secure screen recorder",
+    image: shottrImg,
+    url: "https://shottr.cc",
     category: "utility",
+    price: "freemium",
+    loginItem: true,
+  },
+  {
+    name: "Mullvad",
+    description:
+      "A minimal, fast, cost effective and actually secure VPN. Up to 5 Devices or users. The Price is fixed at 5$.",
+    image: mullvadImg,
+    url: "https://mullvad.net",
+    category: "security",
     price: "paid",
+    loginItem: true,
   },
   {
-    name: "Figma",
-    description: "Collaborative design tool",
-    icon: "🎨",
-    url: "https://figma.com",
+    name: "Purepaste",
+    description:
+      "Pure Paste lets you paste as plain text by default. It sits in the menu bar and clears formatting (fonts, colors, bold, links, tables, etc.) from the text you copy.",
+    image: purepasteImg,
+    url: "https://prepost.app",
     category: "productivity",
     price: "freemium",
-  },
-  {
-    name: "Notion",
-    description: "All-in-one workspace",
-    icon: "📝",
-    url: "https://notion.so",
-    category: "productivity",
-    price: "freemium",
+    loginItem: true,
   },
 ];
-

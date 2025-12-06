@@ -8,9 +8,16 @@ import {
   Sparkles,
   Search,
   Bookmark,
+  Coffee,
 } from "lucide-react";
 
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+function NavLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     window.history.pushState({}, "", href);
@@ -250,6 +257,15 @@ export function HomePage() {
                 About
               </span>
             </NavLink>
+            <a
+              href="https://buymeacoffee.com/luuuuumen"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#FFDD00] text-black font-medium text-sm hover:bg-[#FFDD00]/90 transition-colors"
+            >
+              <Coffee className="w-4 h-4" />
+              Buy me a coffee
+            </a>
           </div>
         </div>
       </footer>

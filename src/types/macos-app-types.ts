@@ -1,9 +1,15 @@
 export type MacOSApp = {
   name: string;
   description: string;
-  icon: string;
+  image: string;
   url: string;
-  category: "productivity" | "developer" | "utility" | "media" | "other";
+  category:
+    | "productivity"
+    | "developer"
+    | "utility"
+    | "media"
+    | "other"
+    | "security";
   price: "free" | "paid" | "freemium";
+  loginItem?: boolean;
 };
-
