@@ -26,13 +26,20 @@ export function App() {
           <LucideIcons.Moon className="w-5 h-5" />
         )}
       </Button>
-      <WebsiteCard
-        title="Diagrams.net"
-        description="Diagrams.net, gives you LTS vibes with a modern UI and a lot of extensive features. One of my favorite for fast simple and good looking diagrams."
-        url="https://app.diagrams.net/"
-        tags={["Google Drive compatible", "Simple", "LTS-Feel", "Free"]}
-        tagIcon={<PhosphorIcons.GoogleDriveLogo className="w-5 h-5" />}
-      />
+      <div className="flex flex-col gap-4 w-xl max-w-2xl px-4">
+        <WebsiteCard
+          title="Diagrams.net"
+          description="Diagrams.net, gives you LTS vibes with a modern UI and a lot of extensive features. One of my favorite for fast simple and good looking diagrams."
+          url="https://app.diagrams.net/"
+          tags={["Google Drive compatible", "Simple", "LTS-Feel", "Free"]}
+          tagIcon={[
+            <PhosphorIcons.GoogleDriveLogo className="w-3 h-3" />,
+            <LucideIcons.Circle className="w-3 h-3" />,
+            <LucideIcons.Clock className="w-3 h-3" />,
+            <LucideIcons.CheckCircle className="w-3 h-3" />,
+          ]}
+        />
+      </div>
     </div>
   );
 }

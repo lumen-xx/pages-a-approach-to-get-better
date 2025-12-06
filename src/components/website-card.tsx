@@ -22,7 +22,7 @@ export function WebsiteCard({
   description: string;
   url: string;
   tags: string[];
-  tagIcon: React.ReactNode;
+  tagIcon: React.ReactNode[];
 }) {
   const [showCheck, setShowCheck] = useState(false);
 
@@ -38,15 +38,21 @@ export function WebsiteCard({
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
-      {tags.map((tag) => (
-        <Badge key={tag} className="bg-muted text-muted-foreground">
-          {tag}
-        </Badge>
-      ))}
+      <div className="flex flex-wrap gap-2 text-xs px-6">
+        {tags.map((tag, index) => (
+          <div
+            key={tag}
+            className="flex w-fit p-2 items-center justify-center rounded-md gap-2 bg-muted text-muted-foreground mb-1"
+          >
+            {tagIcon[index]}
+            {tag}
+          </div>
+        ))}
+      </div>
       <Separator />
       <CardContent>
         <a className="flex items-center gap-2">
-          <p className="flex items-center gap-2 bg-muted p-2 rounded-md hover:bg-muted/70 transition-all duration-150">
+          <p className="flex w-full items-center gap-2 bg-muted p-2 rounded-md hover:bg-muted/70 transition-all duration-150">
             {url}
           </p>
           <Button
