@@ -6,7 +6,7 @@ import {
   CardContent,
 } from "./ui/card";
 
-import { CheckIcon, CopyIcon, ExternalLinkIcon } from "lucide-react";
+import { Badge, CheckIcon, CopyIcon, ExternalLinkIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
 import { useState } from "react";
@@ -38,6 +38,11 @@ export function WebsiteCard({
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
+      {tags.map((tag) => (
+        <Badge key={tag} className="bg-muted text-muted-foreground">
+          {tag}
+        </Badge>
+      ))}
       <Separator />
       <CardContent>
         <a className="flex items-center gap-2">
