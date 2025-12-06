@@ -25,15 +25,6 @@ export const websites: Website[] = [
     ],
   },
   {
-    title: "Excalidraw",
-    type: "app",
-    description:
-      "Excalidraw is a simple whiteboard tool that allows you to create diagrams, flowcharts, and more. It's a great tool for quick and easy drawing.",
-    url: "https://excalidraw.com/",
-    tags: ["Simple", "Free", "Drawing", "Collaboration"],
-    tagIcon: [<LucideIcons.PencilRuler className="w-3 h-3" />],
-  },
-  {
     title: "Pairdrop",
     type: "tool",
     description:
