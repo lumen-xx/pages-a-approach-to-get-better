@@ -11,6 +11,32 @@ import { AutomationDetailPage } from "./pages/automation-detail";
 import { InstructionsPage } from "./pages/instructions";
 import { InstructionDetailPage } from "./pages/instruction-detail";
 
+// Instruction Pages
+import MicroEditorPage from "./pages/instructions/micro-editor";
+import NginxApiSetupPage from "./pages/instructions/nginx-api-setup";
+
+// Automation Pages
+import BrewInstallPage from "./pages/automations/brew-install";
+import ConvertToWebpPage from "./pages/automations/convert-to-webp";
+import ScaleImageByMultiplyPage from "./pages/automations/scale-image-by-multiply";
+import BulkPackageInstallPage from "./pages/automations/bulk-package-install";
+import SshPortForwardPage from "./pages/automations/ssh-port-forward";
+import ProductionServerPage from "./pages/automations/production-server";
+
+const instructionRoutes: Record<string, React.ComponentType> = {
+  "micro-editor": MicroEditorPage,
+  "nginx-api-setup": NginxApiSetupPage,
+};
+
+const automationRoutes: Record<string, React.ComponentType> = {
+  "brew-install": BrewInstallPage,
+  "convert-to-webp": ConvertToWebpPage,
+  "scale-image-by-multiply": ScaleImageByMultiplyPage,
+  "bulk-package-install": BulkPackageInstallPage,
+  "ssh-port-forward": SshPortForwardPage,
+  "production-server": ProductionServerPage,
+};
+
 export function App() {
   const [dark, setDark] = useState(
     () => window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -34,6 +60,20 @@ export function App() {
   const instructionMatch = path.match(/^\/instructions\/(.+)$/);
   const instructionSlug = instructionMatch?.[1];
 
+  const renderAutomation = () => {
+    if (!automationSlug) return null;
+    const Component = automationRoutes[automationSlug];
+    if (Component) return <Component />;
+    return <AutomationDetailPage slug={automationSlug} />;
+  };
+
+  const renderInstruction = () => {
+    if (!instructionSlug) return null;
+    const Component = instructionRoutes[instructionSlug];
+    if (Component) return <Component />;
+    return <InstructionDetailPage slug={instructionSlug} />;
+  };
+
   return (
     <div className="min-h-screen">
       <Header dark={dark} setDark={setDark} />
@@ -42,9 +82,9 @@ export function App() {
       {path === "/websites" && <WebsitesPage />}
       {path === "/macos-apps" && <MacOSAppsPage />}
       {path === "/automations" && <AutomationsPage />}
-      {automationSlug && <AutomationDetailPage slug={automationSlug} />}
+      {renderAutomation()}
       {path === "/instructions" && <InstructionsPage />}
-      {instructionSlug && <InstructionDetailPage slug={instructionSlug} />}
+      {renderInstruction()}
     </div>
   );
 }

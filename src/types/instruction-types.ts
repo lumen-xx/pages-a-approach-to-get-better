@@ -12,7 +12,6 @@ export type Instruction = {
   image?: string;
   category: "setup" | "config" | "tips" | "troubleshooting" | "other";
   difficulty: "beginner" | "intermediate" | "advanced";
-  content: string;
+  content?: string;
   dependencies?: Dependency[];
 };
-

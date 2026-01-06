@@ -12,6 +12,6 @@ export type Automation = {
   image?: string;
   category: "shortcuts" | "applescript" | "raycast" | "terminal" | "other";
   difficulty: "beginner" | "intermediate" | "advanced";
-  content: string;
+  content?: string;
   dependencies?: Dependency[];
 };
