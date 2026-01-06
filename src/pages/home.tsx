@@ -2,7 +2,7 @@ import { Button } from "../components/ui/button";
 import {
   Globe,
   Monitor,
-  Apple,
+  BookOpen,
   Zap,
   ArrowRight,
   Sparkles,
@@ -10,6 +10,10 @@ import {
   Bookmark,
 } from "lucide-react";
 import { Footer } from "../components/footer";
+import { websites } from "../data/websites";
+import { macosApps } from "../data/macos-apps";
+import { automations } from "../data/automations";
+import { instructions } from "../data/instructions";
 
 function NavLink({
   href,
@@ -165,28 +169,28 @@ export function HomePage() {
               href="/websites"
               icon={Globe}
               title="Websites"
-              count={12}
+              count={websites.length}
               gradient="bg-gradient-to-br from-blue-600 to-blue-800"
             />
             <CategoryCard
               href="/macos-apps"
               icon={Monitor}
               title="macOS Apps"
-              count={8}
+              count={macosApps.length}
               gradient="bg-gradient-to-br from-purple-600 to-purple-800"
             />
             <CategoryCard
-              href="/macos"
-              icon={Apple}
-              title="macOS"
-              count={5}
+              href="/instructions"
+              icon={BookOpen}
+              title="Instructions"
+              count={instructions.length}
               gradient="bg-gradient-to-br from-zinc-600 to-zinc-800"
             />
             <CategoryCard
               href="/automations"
               icon={Zap}
               title="Automations"
-              count={6}
+              count={automations.length}
               gradient="bg-gradient-to-br from-amber-600 to-orange-700"
             />
           </div>

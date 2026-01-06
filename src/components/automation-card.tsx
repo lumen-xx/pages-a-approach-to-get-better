@@ -33,30 +33,28 @@ export function AutomationCard({
     <a
       href={`/automations/${automation.slug}`}
       onClick={handleClick}
-      className="group relative flex flex-col p-5 rounded-2xl border border-border bg-card hover:bg-muted/50 hover:border-foreground/20 transition-all duration-200 hover:-translate-y-1"
+      className="group flex items-center gap-4 p-4 rounded-xl border border-border bg-card hover:bg-muted/50 hover:border-foreground/20 transition-all"
     >
-      <div className="flex items-start justify-between mb-3">
-        {automation.image ? (
-          <img
-            src={automation.image}
-            alt={automation.title}
-            className="w-12 h-12 rounded-xl object-contain"
-          />
-        ) : (
-          <span className="text-4xl">{automation.icon}</span>
-        )}
-        <ChevronRight className="w-5 h-5 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+      {automation.image ? (
+        <img
+          src={automation.image}
+          alt={automation.title}
+          className="w-10 h-10 rounded-lg object-contain flex-shrink-0"
+        />
+      ) : (
+        <span className="text-3xl flex-shrink-0">{automation.icon}</span>
+      )}
+
+      <div className="flex-1 min-w-0">
+        <h3 className="font-semibold">
+          <Highlight text={automation.title} query={searchQuery} />
+        </h3>
+        <p className="text-sm text-muted-foreground truncate">
+          <Highlight text={automation.description} query={searchQuery} />
+        </p>
       </div>
 
-      <h3 className="font-semibold text-lg mb-1">
-        <Highlight text={automation.title} query={searchQuery} />
-      </h3>
-
-      <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-        <Highlight text={automation.description} query={searchQuery} />
-      </p>
-
-      <div className="mt-auto flex items-center gap-2 flex-wrap">
+      <div className="hidden sm:flex items-center gap-2 flex-shrink-0">
         <span
           className={`text-xs px-2 py-1 rounded-md font-medium ${categoryColors[automation.category]}`}
         >
@@ -68,6 +66,8 @@ export function AutomationCard({
           {automation.difficulty}
         </span>
       </div>
+
+      <ChevronRight className="w-5 h-5 text-muted-foreground flex-shrink-0 group-hover:translate-x-1 transition-transform" />
     </a>
   );
 }

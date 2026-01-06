@@ -11,6 +11,7 @@ users:
 
 # Packages to install
 packages:
+  - unzip
   - nginx
   - certbot
   - python3-certbot-nginx
@@ -20,7 +21,6 @@ packages:
   - htop
   - curl
   - git
-  - unzip
   - unattended-upgrades
 
 package_update: true

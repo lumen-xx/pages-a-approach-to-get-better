@@ -50,4 +50,19 @@ export const websites: Website[] = [
     tags: ["Simple", "Free", "Paint"],
     tagIcon: [<LucideIcons.Palette className="w-3 h-3" />],
   },
+  {
+    title: "Piskel",
+    type: "website",
+    description:
+      "Piskel is a free online editor for animated sprites and pixel art. It features a live preview of your animation and supports exporting to GIF, PNG and more.",
+    url: "https://www.piskelapp.com/",
+    tags: ["Pixel Art", "Animation", "Free", "Open Source", "Editor"],
+    tagIcon: [
+      <LucideIcons.Image className="w-3 h-3" />,
+      <LucideIcons.Clock className="w-3 h-3" />,
+      <LucideIcons.CheckCircle className="w-3 h-3" />,
+      <LucideIcons.GitBranchIcon className="w-3 h-3" />,
+      <LucideIcons.Edit3 className="w-3 h-3" />,
+    ],
+  },
 ];
